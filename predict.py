@@ -162,6 +162,7 @@ cv2.destroyAllWindows()
 
 
 # refer : https://data-flair.training/blogs/handwritten-character-recognition-neural-network/
+# https://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/
 
 
 
