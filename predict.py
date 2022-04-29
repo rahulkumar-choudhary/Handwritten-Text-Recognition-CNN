@@ -108,13 +108,13 @@ model.add(Dense(128,activation ="relu"))
 model.add(Dense(26,activation ="softmax"))
 
 
-# 
+# compiling and fitting model
 model.compile(optimizer = Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
 history = model.fit(train_X, train_yOHE, epochs=1,  validation_data = (test_X,test_yOHE))
 
 
-
+# save model
 model.summary()
 model.save(r'model_hand.h5')
 
@@ -125,7 +125,7 @@ print("The validation loss is :", history.history['val_loss'])
 print("The training loss is :", history.history['loss'])
 
 
-
+# Prediction on test data
 fig, axes = plt.subplots(3,3, figsize=(8,9))
 axes = axes.flatten()
 
@@ -138,8 +138,8 @@ for i,ax in enumerate(axes):
     ax.grid()
     
     
-    
-img = cv2.imread(r'C:\Users\abhij\Downloads\img_b.jpg')
+# Predection on External Image
+img = cv2.imread(r'imgage.jpg')
 img_copy = img.copy()
 
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -168,18 +168,3 @@ while (1):
     if k == 27:
         break
 cv2.destroyAllWindows()
-
-
-# refer : https://data-flair.training/blogs/handwritten-character-recognition-neural-network/
-# https://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/
-
-
-
-
-
-
-
-
-
-
-
