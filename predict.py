@@ -42,16 +42,27 @@ alphabets = []
 for i in word_dict.values():
     alphabets.append(i)
 
+
 fig, ax = plt.subplots(1,1, figsize=(10,10))
 ax.barh(alphabets, count)
 
-plt.xlabel("Number of elements ")
+# naming the x axis
+plt.xlabel("Number of elements")
+# naming the y axis
 plt.ylabel("Alphabets")
-plt.grid()
+# giving a title  
+plt.title("Plotting the number of alphabets")
+# Turn on the minor TICKS, which are required for the minor GRID
+plt.minorticks_on()
+# Customize the major grid
+plt.grid(which='major', linestyle='-', linewidth='0.5', color='red')
+# Customize the minor grid
+plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+
 plt.show()
 
 
-# 
+# Shuffling the data
 shuff = shuffle(train_x[:100])
 
 fig, ax = plt.subplots(3,3, figsize = (10,10))
@@ -59,33 +70,25 @@ axes = ax.flatten()
 
 for i in range(9):
     _, shu = cv2.threshold(shuff[i], 30, 200, cv2.THRESH_BINARY)
-    axes[i].imshow(np.reshape(shuff[i], (28,28)), cmap="Greys")
+    axes[i].imshow(np.reshape(shuff[i], (28,28)), cmap=plt.get_cmap('gray'))
 plt.show()
 
 
+# Reshape data for model creation
 train_X = train_x.reshape(train_x.shape[0],train_x.shape[1],train_x.shape[2],1)
-print("New shape of train data: ", train_X.shape)
+print("The new shape of train data: ", train_X.shape)
 
 test_X = test_x.reshape(test_x.shape[0], test_x.shape[1], test_x.shape[2],1)
-print("New shape of train data: ", test_X.shape)
+print("The new shape of train data: ", test_X.shape)
 
-
-Now we reshape the train & test image dataset so that they can be put in the model.
-
-New shape of train data:  (297960, 28, 28, 1)
-New shape of train data:  (74490, 28, 28, 1)
-  
-  
- 
 train_yOHE = to_categorical(train_y, num_classes = 26, dtype='int')
-print("New shape of train labels: ", train_yOHE.shape)
+print("The new shape of train labels: ", train_yOHE.shape)
 
 test_yOHE = to_categorical(test_y, num_classes = 26, dtype='int')
-print("New shape of test labels: ", test_yOHE.shape)
+print("The new shape of test labels: ", test_yOHE.shape)
 
 
-
-
+# model creation
 model = Sequential()
 
 model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=(28,28,1)))
@@ -105,7 +108,7 @@ model.add(Dense(128,activation ="relu"))
 model.add(Dense(26,activation ="softmax"))
 
 
-
+# 
 model.compile(optimizer = Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
 history = model.fit(train_X, train_yOHE, epochs=1,  validation_data = (test_X,test_yOHE))
