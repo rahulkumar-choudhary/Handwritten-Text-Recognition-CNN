@@ -138,8 +138,9 @@ for i,ax in enumerate(axes):
     ax.grid()
     
     
-# Predection on External Image
-img = cv2.imread(r'imgage.jpg')
+# Predection on External Image
+
+img = cv2.imread(r'image.jpg')
 img_copy = img.copy()
 
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -157,11 +158,9 @@ img_final =np.reshape(img_final, (1,28,28,1))
 
 img_pred = word_dict[np.argmax(model.predict(img_final))]
 
-cv2.putText(img, "Dataflair _ _ _ ", (20,25), cv2.FONT_HERSHEY_TRIPLEX, 0.7, color = (0,0,230))
-cv2.putText(img, "Prediction: " + img_pred, (20,410), cv2.FONT_HERSHEY_DUPLEX, 1.3, color = (255,0,30))
-cv2.imshow('Dataflair handwritten character recognition _ _ _ ', img)
-
-
+cv2.putText(img, "Image Data", (100,25), cv2.FONT_HERSHEY_DUPLEX , fontScale= 1, thickness=2, color = (255,0,0))
+cv2.putText(img, "Character Prediction: " + img_pred, (10,410), cv2.FONT_HERSHEY_SIMPLEX, fontScale= 1, thickness=2, color = (0,0,255))
+cv2.imshow('Character Recognition', img)
 
 while (1):
     k = cv2.waitKey(1) & 0xFF
