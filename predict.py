@@ -131,11 +131,10 @@ axes = axes.flatten()
 
 for i,ax in enumerate(axes):
     img = np.reshape(test_X[i], (28,28))
-    ax.imshow(img, cmap="Greys")
+    ax.imshow(img,  cmap=plt.get_cmap('gray'))
     
     pred = word_dict[np.argmax(test_yOHE[i])]
     ax.set_title("Prediction: "+pred)
-    ax.grid()
     
     
 # Predection on External Image
