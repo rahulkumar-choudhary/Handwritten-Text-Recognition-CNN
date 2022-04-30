@@ -125,6 +125,15 @@ print("The validation loss is :", history.history['val_loss'])
 print("The training loss is :", history.history['loss'])
 
 
+'''
+from keras.models import load_model
+
+model = load_model('model_hand.h5')
+
+model.summary()
+'''
+
+
 # Prediction on test data
 fig, axes = plt.subplots(3,3, figsize=(8,9))
 axes = axes.flatten()
